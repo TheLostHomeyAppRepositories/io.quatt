@@ -86,7 +86,7 @@ module.exports = {
       };
 
       // Helper to get aggregated value from both heatpumps (sum or average)
-      const getAggregatedCapability = (name: string, aggregation: 'sum' | 'avg' | 'first'): number | null => {
+      const getAggregatedCapability = (name: string, aggregation: 'sum' | 'avg' | 'avg_nonzero' | 'first'): number | null => {
         // Single heatpump setup
         if (device.hasCapability(name)) {
           return device.getCapabilityValue(name);
@@ -115,6 +115,15 @@ module.exports = {
           return val1 + val2;
         }
 
+        if (aggregation === 'avg_nonzero') {
+          // Average only non-zero values (for COP: inactive pumps report 0)
+          const nonZeroValues = [val1, val2].filter(v => v > 0);
+          if (nonZeroValues.length === 0) {
+            return 0;
+          }
+          return nonZeroValues.reduce((a, b) => a + b, 0) / nonZeroValues.length;
+        }
+
         // Average - only count non-null values
         const count = (hp1Value !== null ? 1 : 0) + (hp2Value !== null ? 1 : 0);
         return count > 0 ? (val1 + val2) / count : null;
@@ -125,7 +134,7 @@ module.exports = {
       const setpoint = device.getCapabilityValue('measure_thermostat_setpoint_room_temperature');
       const outsideTemp = getAggregatedCapability('measure_heatpump_temperature_outside', 'first'); // Same for both
       const power = device.getCapabilityValue('measure_power'); // Total power already aggregated
-      const cop = getAggregatedCapability('measure_heatpump_cop', 'avg'); // Average COP of both heatpumps
+      const cop = getAggregatedCapability('measure_heatpump_cop', 'avg_nonzero'); // Average COP of active heatpumps only
       const waterSupplyTemp = device.getCapabilityValue('measure_flowmeter_water_supply_temperature');
       const thermalPower = getAggregatedCapability('measure_heatpump_thermal_power', 'sum'); // Sum thermal power from both
       const flowRate = device.getCapabilityValue('measure_flowmeter_water_flow_speed');
