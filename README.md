@@ -126,6 +126,7 @@ homey app run    # Run with live logs
 
 ## Credits
 
+- Maintained by Dennis Smink ([@cannonb4ll](https://github.com/cannonb4ll))
 - Original app by [@trietsch](https://github.com/trietsch)
 - Additions by [@jvmenen](https://github.com/jvmenen)
 - Additions by [@cannonb4ll](https://github.com/cannonb4ll)

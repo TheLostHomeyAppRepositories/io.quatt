@@ -33,18 +33,18 @@
     "large": "/assets/images/large.png"
   },
   "author": {
-    "name": "Robin Trietsch",
-    "email": "homey@trietsch.dev"
+    "name": "Dennis Smink",
+    "email": "dennis@webbuilds.nl"
   },
   "contributors": {
     "developers": [
       {
-        "name": "Robin Trietsch",
-        "email": "homey@trietsch.dev"
-      },
-      {
         "name": "Dennis Smink",
         "email": "dennis@webbuilds.nl"
+      },
+      {
+        "name": "Robin Trietsch",
+        "email": "homey@trietsch.dev"
       }
     ],
     "translators": [
@@ -55,13 +55,6 @@
         "name": "🇳🇱 Robin Trietsch"
       }
     ]
-  },
-  "contributing": {
-    "donate": {
-      "paypal": {
-        "username": "robintrietsch"
-      }
-    }
   },
   "source": "https://github.com/trietsch/io.quatt",
   "homeyCommunityTopicId": 91446,
